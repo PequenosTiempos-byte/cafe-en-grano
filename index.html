@@ -2,309 +2,376 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto Café</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Proyecto Café — Panel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,600&family=Spline+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500&family=Spline+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#f4ece0;
-    --paper:#f9f3ea;
-    --ink:#241710;
-    --ink-soft:#5b4636;
-    --muted:#8c7660;
-    --terra:#bd4a22;
-    --terra-deep:#9a3a18;
-    --verde:#5f6b39;
-    --line:#d8c9b4;
-    --display:"Fraunces",Georgia,serif;
-    --body:"Spline Sans",system-ui,sans-serif;
-    --mono:"JetBrains Mono",monospace;
+    --cream:#f3ebdf; --paper:#fbf6ee; --paper2:#f7efe3;
+    --ink:#241710; --ink-soft:#5b4636; --muted:#8c7660;
+    --terra:#bd4a22; --terra-deep:#9a3a18; --verde:#5f7d3a;
+    --good:#5f7d3a; --warn:#c8841f; --line:#e2d5c1;
+    --display:"Fraunces",Georgia,serif; --body:"Spline Sans",system-ui,sans-serif; --mono:"JetBrains Mono",monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--cream);
-    color:var(--ink);
-    font-family:var(--body);
-    font-size:17px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  /* grain */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;
-    opacity:.04;mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
-  a{color:inherit}
+  body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:74px}
+  .app{max-width:840px;margin:0 auto;padding:0 16px}
+  h2{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;margin:0 0 4px}
+  section{padding:30px 0 8px;scroll-margin-top:78px}
+  .sec-sub{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+  .mono{font-family:var(--mono)}
 
-  /* ---- top bar ---- */
-  .bar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:22px 28px;max-width:1080px;margin:0 auto;
-    position:relative;z-index:5;
-  }
-  .brand{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:.5px;display:flex;align-items:center;gap:9px}
-  .bean{width:18px;height:18px;display:inline-block}
-  .pill{
-    font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;
-    color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:6px 13px;
-    background:var(--paper);
-  }
+  /* ---- header ---- */
+  header{position:sticky;top:0;z-index:40;background:rgba(243,235,223,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .head{max-width:840px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:13px}
+  .logo{width:42px;height:42px;border-radius:12px;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;flex:0 0 auto;box-shadow:0 6px 16px -8px var(--terra-deep)}
+  .head h1{font-family:var(--display);font-weight:900;font-size:20px;line-height:1.05}
+  .head .meta{font-size:12px;color:var(--muted)}
+  .badge{margin-left:auto;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:#fff;background:var(--verde);padding:6px 10px;border-radius:100px;white-space:nowrap}
 
-  /* ---- hero ---- */
-  .hero{padding:60px 0 90px;position:relative}
-  .hero .eyebrow{
-    font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;
-    color:var(--terra);margin-bottom:26px;
-  }
-  .hero h1{
-    font-family:var(--display);font-weight:900;
-    font-size:clamp(58px,12vw,148px);line-height:.9;letter-spacing:-.02em;
-    margin-bottom:30px;
-  }
-  .hero h1 em{font-style:italic;font-weight:500;color:var(--terra)}
-  .lead{
-    font-size:clamp(19px,2.4vw,25px);max-width:560px;color:var(--ink-soft);
-    font-weight:400;line-height:1.45;
-  }
-  .lead b{color:var(--ink);font-weight:600}
-  .hero-bean{
-    position:absolute;right:-40px;top:30px;width:min(46vw,420px);opacity:.9;
-    transform:rotate(-12deg);pointer-events:none;
-  }
+  /* ---- KPI cards ---- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:22px 0 8px}
+  .kpi{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:15px 14px}
+  .kpi .lab{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:7px;line-height:1.3}
+  .kpi .val{font-family:var(--display);font-weight:900;font-size:27px;line-height:1;color:var(--terra)}
+  .kpi .val.v{color:var(--verde)}
+  .kpi .sub{font-size:11.5px;color:var(--ink-soft);margin-top:6px}
 
-  /* reveal */
-  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+  .status{display:flex;gap:11px;align-items:flex-start;background:var(--ink);color:var(--paper);border-radius:15px;padding:16px 18px;margin-top:11px}
+  .status .dot{width:9px;height:9px;border-radius:50%;background:var(--warn);margin-top:6px;flex:0 0 auto;box-shadow:0 0 0 4px rgba(200,132,31,.25)}
+  .status b{font-weight:600;color:#fff}
+  .status span{font-size:13.5px;color:#e8d9c8}
 
-  /* ---- section frame ---- */
-  section{padding:74px 0;border-top:1px solid var(--line)}
-  .ktag{
-    font-family:var(--mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px;
-  }
-  .ktag::before{content:"";width:26px;height:1px;background:var(--terra)}
-  h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4.5vw,46px);line-height:1.05;letter-spacing:-.01em;margin-bottom:30px}
+  /* ---- progress ---- */
+  .prog{display:flex;flex-direction:column;gap:13px}
+  .pr .top{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+  .pr .pct{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+  .track{height:8px;background:#e7dac6;border-radius:6px;overflow:hidden}
+  .fill{height:100%;border-radius:6px;background:var(--terra)}
+  .fill.z{background:#d9c9b2}
 
-  /* idea pull */
-  .pull{font-family:var(--display);font-weight:500;font-size:clamp(24px,3.6vw,38px);line-height:1.3;max-width:880px}
-  .pull em{font-style:italic;color:var(--terra)}
+  /* ---- two-col lists ---- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  .listcard{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:18px}
+  .listcard h3{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+  .listcard ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .listcard li{font-size:13.5px;line-height:1.45;padding-left:22px;position:relative;color:var(--ink-soft)}
+  .listcard li::before{position:absolute;left:0;top:0;font-weight:700}
+  .done li::before{content:"✓";color:var(--good)}
+  .todo li::before{content:"!";color:var(--warn)}
 
-  /* apuesta cards */
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .card{
-    background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:30px 26px;
-    transition:transform .35s ease,box-shadow .35s ease;
-  }
-  .card:hover{transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(50,30,15,.45)}
-  .card .num{font-family:var(--mono);font-size:13px;color:var(--terra);margin-bottom:14px}
-  .card h3{font-family:var(--display);font-weight:600;font-size:21px;margin-bottom:10px}
-  .card p{font-size:15.5px;color:var(--ink-soft)}
+  /* ---- generic cards ---- */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .mini .n{font-family:var(--mono);font-size:12px;color:var(--terra);margin-bottom:7px}
+  .mini h4{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:5px}
+  .mini p{font-size:13px;color:var(--ink-soft)}
 
-  /* regla band */
-  .band{background:var(--terra);color:#fbeee4;border:none;text-align:center}
-  .band .ktag{color:#f0c9b6;justify-content:center}
-  .band .ktag::before{background:#f0c9b6}
-  .band p{font-family:var(--display);font-weight:500;font-size:clamp(26px,4vw,42px);line-height:1.25;max-width:820px;margin:0 auto}
-  .band p span{font-style:italic;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
-
-  /* etapas */
-  .steps{display:flex;flex-direction:column;gap:0}
-  .step{display:grid;grid-template-columns:88px 1fr;gap:28px;padding:30px 0;border-bottom:1px dashed var(--line)}
-  .step:last-child{border-bottom:none}
-  .step .idx{font-family:var(--display);font-weight:900;font-size:54px;line-height:1;color:var(--line)}
-  .step.verde .idx{color:#bcc29a}
-  .step h3{font-family:var(--display);font-weight:600;font-size:25px;margin-bottom:8px}
-  .step .what{color:var(--ink-soft);max-width:560px;margin-bottom:16px}
-  .corte{
-    font-family:var(--mono);font-size:13.5px;line-height:1.6;
-    background:#efe4d3;border-left:3px solid var(--terra);border-radius:0 8px 8px 0;
-    padding:12px 16px;color:var(--ink-soft);max-width:620px;
-  }
+  /* ---- etapas ---- */
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:11px}
+  .step .ix{font-family:var(--display);font-weight:900;font-size:34px;color:var(--line);line-height:.9}
+  .step.verde .ix{color:#c3cda6}
+  .step h4{font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:4px}
+  .step .what{font-size:13.5px;color:var(--ink-soft);margin-bottom:11px}
+  .corte{font-family:var(--mono);font-size:11.5px;line-height:1.5;background:var(--paper2);border-left:3px solid var(--terra);border-radius:0 7px 7px 0;padding:9px 12px;color:var(--ink-soft)}
   .step.verde .corte{border-left-color:var(--verde)}
-  .corte b{color:var(--ink);font-weight:500}
+  .corte b{color:var(--ink)}
 
-  /* roles */
-  .roles{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  .role{border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--paper)}
-  .role .who{font-family:var(--display);font-weight:600;font-size:24px;margin-bottom:4px}
-  .role .who span{font-size:13px;font-family:var(--mono);color:var(--terra);text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:10px}
-  .role p{color:var(--ink-soft);font-size:15.5px}
-  .role + .role .who span{color:var(--verde)}
+  /* ---- tables ---- */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+  table{border-collapse:collapse;width:100%;min-width:420px;font-size:13.5px}
+  th,td{padding:10px 13px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{background:var(--paper2);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:500}
+  td.num{font-family:var(--mono)}
+  tr.tot td{font-weight:700;background:var(--paper2);border-top:2px solid var(--line)}
+  tr.tot td.pos{color:var(--good)}
+  .cap{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.5}
 
-  /* CTA pela */
-  .cta{background:var(--ink);color:var(--cream);border:none;border-radius:22px;margin:74px auto;padding:56px 48px;max-width:1024px}
-  .cta .ktag{color:#c79d82}
-  .cta .ktag::before{background:#c79d82}
-  .cta h2{color:var(--paper);margin-bottom:34px}
-  .asks{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .ask{border-top:1px solid #4a3729;padding-top:18px}
-  .ask .n{font-family:var(--mono);color:var(--terra);font-size:14px;margin-bottom:10px}
-  .ask p{color:#e8d9c8;font-size:16px;line-height:1.5}
-  .ask p b{color:#fff;font-weight:600}
+  /* ---- pasos ---- */
+  .phase{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--terra);margin:18px 0 11px;display:flex;align-items:center;gap:9px}
+  .phase::after{content:"";flex:1;height:1px;background:var(--line)}
+  .task{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .task:last-child{border-bottom:none}
+  .task .b{width:26px;height:26px;border-radius:50%;background:var(--terra);color:#fff;font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:500}
+  .task.v .b{background:var(--verde)}
+  .task h5{font-size:14px;font-weight:600;margin-bottom:2px}
+  .task p{font-size:12.5px;color:var(--ink-soft)}
 
-  /* footer */
-  footer{padding:60px 0 80px;border-top:1px solid var(--line)}
-  .files{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
-  .files a{
-    font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--ink-soft);
-    border:1px solid var(--line);border-radius:8px;padding:8px 13px;background:var(--paper);
-    transition:.25s;
-  }
-  .files a:hover{border-color:var(--terra);color:var(--terra)}
-  .foot-note{font-size:14px;color:var(--muted);max-width:620px}
-  .sig{font-family:var(--display);font-style:italic;font-size:15px;color:var(--ink-soft);margin-top:24px}
+  /* ---- rule banner ---- */
+  .rule{background:linear-gradient(135deg,var(--terra),var(--terra-deep));color:#fff;border-radius:18px;padding:24px 22px;margin:26px 0;text-align:center}
+  .rule .k{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#f3c9b6;margin-bottom:10px}
+  .rule p{font-family:var(--display);font-weight:500;font-size:21px;line-height:1.35}
+  .rule p b{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 
-  @media(max-width:760px){
-    .cards,.asks{grid-template-columns:1fr}
-    .roles{grid-template-columns:1fr}
-    .hero-bean{opacity:.18;right:-60px}
-    .step{grid-template-columns:54px 1fr;gap:16px}
-    .step .idx{font-size:38px}
-    section{padding:54px 0}
-    .cta{padding:40px 26px;border-radius:16px}
+  .filebar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 26px}
+  .filebar a{font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--ink-soft);border:1px solid var(--line);border-radius:8px;padding:7px 11px;background:var(--paper)}
+  .filebar a:hover{border-color:var(--terra);color:var(--terra)}
+
+  /* ---- bottom nav ---- */
+  nav{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(251,246,238,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .navin{max-width:840px;margin:0 auto;display:flex;justify-content:space-around;padding:7px 4px 9px}
+  nav a{flex:1;text-decoration:none;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;font-weight:600;letter-spacing:.3px;padding:4px 0;border-radius:10px;transition:color .2s}
+  nav a .ic{font-size:18px;line-height:1}
+  nav a.active{color:var(--terra)}
+
+  @media(max-width:680px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .two,.cards3{grid-template-columns:1fr}
+    .head h1{font-size:18px}
+    nav a{font-size:8.5px}
   }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute"><symbol id="beansym" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="30" ry="44" fill="currentColor"/><path d="M50 10 C38 30 62 50 50 90" stroke="var(--cream)" stroke-width="4" fill="none" stroke-linecap="round" opacity=".55"/></symbol></svg>
-
-<div class="bar">
-  <div class="brand"><svg class="bean" style="color:var(--terra)"><use href="#beansym"/></svg>Proyecto Café</div>
-  <div class="pill">Idea en exploración · jun 2026</div>
-</div>
-
-<header class="hero wrap">
-  <svg class="hero-bean" style="color:var(--terra-deep)"><use href="#beansym"/></svg>
-  <div class="eyebrow rv in">Para Pela · plan de arranque</div>
-  <h1 class="rv in d1">Café de<br>especialidad,<br><em>marca propia.</em></h1>
-  <p class="lead rv in d2">Sin maquinaria, sin importar al arranque, <b>sin gastar un peso hasta validar</b>. Esto es la idea convertida en un plan con etapas, fechas y criterios de corte.</p>
+<header>
+  <div class="head">
+    <div class="logo">☕</div>
+    <div>
+      <h1>Proyecto Café</h1>
+      <div class="meta">Panel del proyecto · Junio 2026</div>
+    </div>
+    <div class="badge">Etapa 0 · Validación</div>
+  </div>
 </header>
 
-<section class="wrap">
-  <div class="ktag rv">La idea en una línea</div>
-  <p class="pull rv d1">Comprar grano, <em>tercerizar el tueste</em>, poner marca, packaging y distribución, y vender online y a cafeterías. Cero inversión en máquinas: el margen está en la marca y la venta, no en el fierro.</p>
-</section>
+<div class="app">
 
-<section class="wrap">
-  <div class="ktag rv">La apuesta · por qué así</div>
-  <div class="cards">
-    <div class="card rv">
-      <div class="num">01</div>
-      <h3>Tueste tercerizado</h3>
-      <p>Un tostador local lo tuesta al perfil deseado. Producto fresco, cero capex, arranque sin riesgo.</p>
+  <!-- ESTADO -->
+  <section id="estado">
+    <div class="kpis">
+      <div class="kpi"><div class="lab">Margen bruto · online</div><div class="val">60%</div><div class="sub">bolsa 250 g</div></div>
+      <div class="kpi"><div class="lab">Margen bruto · cafeterías</div><div class="val v">53%</div><div class="sub">por kilo</div></div>
+      <div class="kpi"><div class="lab">PVP online</div><div class="val">$22K</div><div class="sub">por 250 g</div></div>
+      <div class="kpi"><div class="lab">Equilibrio</div><div class="val">5</div><div class="sub">bolsas / mes</div></div>
     </div>
-    <div class="card rv d1">
-      <div class="num">02</div>
-      <h3>No importar al arranque</h3>
-      <p>Importar es la punta cara del negocio. Primero probamos que <em>alguien compra</em>.</p>
-    </div>
-    <div class="card rv d2">
-      <div class="num">03</div>
-      <h3>Brasil entra después</h3>
-      <p>El contacto para traer grano <b>verde</b> se activa recién cuando el volumen lo justifique.</p>
-    </div>
-  </div>
-</section>
 
-<section class="band">
-  <div class="wrap">
-    <div class="ktag rv">Regla de oro</div>
-    <p class="rv d1">No se gasta un peso en stock hasta tener <span>10 personas que paguen o dejen seña.</span> Plata o seña — no "me interesa".</p>
-  </div>
-</section>
+    <div class="status">
+      <div class="dot"></div>
+      <span><b>Idea en exploración.</b> La tarea de hoy es completar las averiguaciones y conseguir 10 compromisos pagos. No se gasta un peso hasta validar. Corte: <b>31/07/2026</b>.</span>
+    </div>
 
-<section class="wrap">
-  <div class="ktag rv">El camino · tres etapas</div>
-  <h2 class="rv d1">Cada etapa tiene un criterio de corte.</h2>
-  <div class="steps">
-    <div class="step rv">
-      <div class="idx">0</div>
-      <div>
-        <h3>Validar — sin stock</h3>
-        <p class="what">Completar las averiguaciones y conseguir 10 compromisos pagos. Probar que alguien compra antes de mover un peso.</p>
-        <div class="corte">CORTE · 31/07/2026 → <b>10 compromisos</b>: se avanza · <b>5–9</b>: se revisa precio/producto y se extiende un mes · <b>&lt;5</b>: se frena.</div>
+    <h2 style="margin-top:30px">📊 Progreso del proyecto</h2>
+    <div class="sec-sub">Dónde estamos hoy, sin maquillaje.</div>
+    <div class="prog">
+      <div class="pr"><div class="top"><span>Idea y concepto</span><span class="pct">90%</span></div><div class="track"><div class="fill" style="width:90%"></div></div></div>
+      <div class="pr"><div class="top"><span>Estrategia y etapas definidas</span><span class="pct">80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+      <div class="pr"><div class="top"><span>Modelo de costos y márgenes</span><span class="pct">70%</span></div><div class="track"><div class="fill" style="width:70%"></div></div></div>
+      <div class="pr"><div class="top"><span>Averiguaciones (costos / precio / registros)</span><span class="pct">15%</span></div><div class="track"><div class="fill" style="width:15%"></div></div></div>
+      <div class="pr"><div class="top"><span>Marca y rótulo</span><span class="pct">5%</span></div><div class="track"><div class="fill z" style="width:5%"></div></div></div>
+      <div class="pr"><div class="top"><span>Validación — 10 compromisos pagos</span><span class="pct">0 / 10</span></div><div class="track"><div class="fill z" style="width:2%"></div></div></div>
+      <div class="pr"><div class="top"><span>Tostador (maquila) cerrado</span><span class="pct">0%</span></div><div class="track"><div class="fill z" style="width:2%"></div></div></div>
+      <div class="pr"><div class="top"><span>Ventas (online + cafeterías)</span><span class="pct">0%</span></div><div class="track"><div class="fill z" style="width:2%"></div></div></div>
+    </div>
+
+    <div class="two" style="margin-top:24px">
+      <div class="listcard done">
+        <h3>✓ Ya está definido</h3>
+        <ul>
+          <li>Modelo: marca propia + tueste tercerizado (cero capex)</li>
+          <li>Regla de oro: no se gasta hasta validar 10 compromisos pagos</li>
+          <li>Secuencia: validar → marca local → importar verde</li>
+          <li>Verde "ya importado" a importador local al inicio</li>
+          <li>Roles base: Pela motor · Char estrategia e impositivo</li>
+          <li>Camino por etapas con criterios de corte</li>
+        </ul>
+      </div>
+      <div class="listcard todo">
+        <h3>! Pendiente ahora</h3>
+        <ul>
+          <li>Cotizar tostadores que hagan maquila <span class="mono">#1</span></li>
+          <li>Cotizar costo del verde importado local <span class="mono">#2</span></li>
+          <li>Relevar precios de mercado online y B2B <span class="mono">#3</span></li>
+          <li>Averiguar rotulado y registros RNE/RNPA <span class="mono">#4</span></li>
+          <li>Lista de 10–15 cafeterías candidatas <span class="mono">#5</span></li>
+          <li>Conseguir 10 compromisos pagos · corte 31/07</li>
+          <li>Redactar v1 del acuerdo de socios</li>
+          <li>Confirmar incompatibilidad laboral de Char</li>
+        </ul>
       </div>
     </div>
-    <div class="step rv d1">
-      <div class="idx">1</div>
-      <div>
-        <h3>Marca propia con tueste local</h3>
-        <p class="what">Cerrar tostador, rótulo mínimo, primeras ventas online y 3–5 cafeterías. Firmar el acuerdo de socios antes de la primera venta.</p>
-        <div class="corte">PASE A ETAPA 2 → solo con <b>volumen recurrente</b> que justifique importar. Sin recompra, no se invierte más.</div>
+  </section>
+
+  <!-- IDEA -->
+  <section id="idea">
+    <h2>☕ La idea</h2>
+    <div class="sec-sub">Café de especialidad con marca propia, sin maquinaria y sin importar al arranque.</div>
+    <div class="cards3">
+      <div class="mini"><div class="n">01</div><h4>Tueste tercerizado</h4><p>Un tostador local tuesta al perfil. Producto fresco, cero inversión en máquinas.</p></div>
+      <div class="mini"><div class="n">02</div><h4>No importar al inicio</h4><p>Se compra verde ya importado a un proveedor local, en pesos. Validar antes de traer.</p></div>
+      <div class="mini"><div class="n">03</div><h4>Brasil entra después</h4><p>Importar grano verde recién cuando el volumen lo justifique (Etapa 2).</p></div>
+    </div>
+    <div class="two" style="margin-top:13px">
+      <div class="listcard">
+        <h3>🛒 Online · B2C</h3>
+        <ul>
+          <li>Venta directa en bolsa de 250 g y 1 kg</li>
+          <li>Mejor margen (~60%), exige captación constante</li>
+          <li>Cobro con medios de pago / plataforma</li>
+        </ul>
+      </div>
+      <div class="listcard">
+        <h3>🏠 Cafeterías · B2B</h3>
+        <ul>
+          <li>Venta por kilo de grano tostado</li>
+          <li>Margen menor (~53%) pero mueve volumen</li>
+          <li>Entrega y cobro por transferencia</li>
+        </ul>
       </div>
     </div>
-    <div class="step verde rv d2">
-      <div class="idx">2</div>
+  </section>
+
+  <!-- CAMINO -->
+  <section id="camino">
+    <h2>🗺️ El camino</h2>
+    <div class="sec-sub">Tres etapas, cada una con su criterio de corte.</div>
+    <div class="step">
+      <div class="ix">0</div>
       <div>
-        <h3>Importar grano verde — Brasil</h3>
-        <p class="what">Activar contacto + despachante, constituir SAS, primer lote chico de prueba. Bajar el costo del grano.</p>
-        <div class="corte">SIN FECHA → recién con <b>demanda probada</b>. Importar antes de tiempo es la forma más cara de equivocarse.</div>
+        <h4>Validar — sin stock</h4>
+        <p class="what">Completar averiguaciones y conseguir 10 compromisos pagos antes de mover un peso.</p>
+        <div class="corte">CORTE 31/07/2026 → <b>10 compromisos</b>: avanza · <b>5–9</b>: revisar y extender 1 mes · <b>&lt;5</b>: frenar.</div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="step">
+      <div class="ix">1</div>
+      <div>
+        <h4>Marca propia con tueste local</h4>
+        <p class="what">Cerrar tostador, rótulo mínimo, primeras ventas online + 3–5 cafeterías. Firmar acuerdo de socios antes de la primera venta.</p>
+        <div class="corte">PASE A ETAPA 2 → solo con <b>volumen recurrente</b> que justifique importar.</div>
+      </div>
+    </div>
+    <div class="step verde">
+      <div class="ix">2</div>
+      <div>
+        <h4>Importar grano verde — Brasil</h4>
+        <p class="what">Activar contacto + despachante, constituir SAS, primer lote chico de prueba.</p>
+        <div class="corte">SIN FECHA → recién con <b>demanda probada</b>. No antes.</div>
+      </div>
+    </div>
+  </section>
 
-<section class="wrap">
-  <div class="ktag rv">Roles · hoy se solapan, se clarifican por escrito</div>
-  <div class="roles">
-    <div class="role rv">
-      <div class="who"><span>El motor</span>Pela</div>
-      <p>Empuje y ejecución. Hacia adelante: operaciones, proveedores y el contacto de Brasil.</p>
+  <!-- NÚMEROS -->
+  <section id="numeros">
+    <h2>💰 Números</h2>
+    <div class="sec-sub">A precios de hoy (FX ARS/USD ≈ $1.430, jun-2026). Modelo ilustrativo, no pronóstico.</div>
+    <div class="kpis">
+      <div class="kpi"><div class="lab">Costo 250 g</div><div class="val">$8,7K</div><div class="sub">producción + comisión</div></div>
+      <div class="kpi"><div class="lab">Margen $ · 250 g</div><div class="val v">$13,3K</div><div class="sub">por bolsa</div></div>
+      <div class="kpi"><div class="lab">Resultado 6 m</div><div class="val">$6,1M</div><div class="sub">operativo proyectado</div></div>
+      <div class="kpi"><div class="lab">Ingresos 6 m</div><div class="val v">$11,5M</div><div class="sub">proyectado</div></div>
     </div>
-    <div class="role rv d1">
-      <div class="who"><span>La estrategia</span>Char</div>
-      <p>Investigación, mirada estratégica y todo lo legal/impositivo. Contador del proyecto.</p>
-    </div>
-  </div>
-</section>
 
-<div class="cta wrap">
-  <div class="ktag rv">Qué necesito de vos, Pela</div>
-  <h2 class="rv d1">Tres cosas para arrancar.</h2>
-  <div class="asks">
-    <div class="ask rv d1">
-      <div class="n">01</div>
-      <p>Confirmar la <b>fecha de corte</b> de la Etapa 0. Propongo el 31/07/2026.</p>
+    <h2 style="font-size:18px;margin-top:26px">Economía unitaria</h2>
+    <div class="tw" style="margin-top:10px">
+      <table>
+        <thead><tr><th>Rubro</th><th>Bolsa 250 g</th><th>Kilo B2B</th></tr></thead>
+        <tbody>
+          <tr><td>Ingreso</td><td class="num">$22.000</td><td class="num">$48.000</td></tr>
+          <tr><td>Café verde</td><td class="num">$3.880</td><td class="num">$15.500</td></tr>
+          <tr><td>Maquila (tueste)</td><td class="num">$1.125</td><td class="num">$4.500</td></tr>
+          <tr><td>Packaging + etiqueta</td><td class="num">$750</td><td class="num">$1.100</td></tr>
+          <tr><td>Logística</td><td class="num">$1.500</td><td class="num">$1.200</td></tr>
+          <tr><td>Comisión pago</td><td class="num">$1.430</td><td class="num">$0</td></tr>
+          <tr class="tot"><td>Margen bruto</td><td class="num pos">$13.300 · 60%</td><td class="num pos">$25.700 · 53%</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="ask rv d2">
-      <div class="n">02</div>
-      <p><b>Una hora por semana</b> de sync fijo. Poco tiempo pero constante le gana a mucho de golpe y después nada.</p>
-    </div>
-    <div class="ask rv d3">
-      <div class="n">03</div>
-      <p>Tu <b>lista de cafeterías y contactos</b> para arrancar la validación.</p>
-    </div>
-  </div>
-</div>
 
-<footer class="wrap">
-  <div class="ktag rv">El detalle vive en el repo</div>
-  <div class="files rv d1">
+    <h2 style="font-size:18px;margin-top:24px">Proyección 6 meses</h2>
+    <div class="tw" style="margin-top:10px">
+      <table>
+        <thead><tr><th></th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Bolsas 250 g</td><td class="num">10</td><td class="num">30</td><td class="num">50</td><td class="num">70</td><td class="num">90</td><td class="num">110</td><td class="num">360</td></tr>
+          <tr><td>Kg cafeterías</td><td class="num">0</td><td class="num">5</td><td class="num">10</td><td class="num">15</td><td class="num">20</td><td class="num">25</td><td class="num">75</td></tr>
+          <tr class="tot"><td>Resultado</td><td class="num">($89K)</td><td class="num pos">$456K</td><td class="num pos">$851K</td><td class="num pos">$1,2M</td><td class="num pos">$1,6M</td><td class="num pos">$2,0M</td><td class="num pos">$6,1M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cap"><b>Leelo con cuidado:</b> ese resultado depende de dos cosas que todavía NO están validadas — el costo del verde (averiguación #2) y, sobre todo, que vendas la rampa. El punto de equilibrio es de solo ~5 bolsas/mes: esto no se cae por costos fijos, se cae si no vendés. Resultado antes de pagarse sueldo y de impuestos más allá del monotributo. El detalle editable está en <span class="mono">finanzas/modelo-6-meses.xlsx</span>.</p>
+  </section>
+
+  <!-- SOCIOS -->
+  <section id="socios">
+    <h2>🤝 Socios</h2>
+    <div class="sec-sub">Roles que hoy se solapan y se clarifican por escrito.</div>
+    <div class="two">
+      <div class="listcard"><h3>Pela · el motor</h3><ul><li>Empuje y ejecución</li><li>Operaciones y proveedores</li><li>Contacto de Brasil (Etapa 2)</li></ul></div>
+      <div class="listcard"><h3>Char · estrategia</h3><ul><li>Investigación y averiguaciones</li><li>Estrategia del proyecto</li><li>Legal e impositivo (contador)</li></ul></div>
+    </div>
+    <h2 style="font-size:18px;margin-top:24px">Qué necesito de vos, Pela</h2>
+    <div class="cards3" style="margin-top:10px">
+      <div class="mini"><div class="n">01</div><h4>La fecha</h4><p>Confirmar el corte de la Etapa 0. Propongo 31/07/2026.</p></div>
+      <div class="mini"><div class="n">02</div><h4>1 h por semana</h4><p>Sync fijo. Poco tiempo pero constante.</p></div>
+      <div class="mini"><div class="n">03</div><h4>Tus contactos</h4><p>Lista de cafeterías para arrancar la validación.</p></div>
+    </div>
+  </section>
+
+  <!-- PASOS -->
+  <section id="pasos">
+    <h2>🚀 Próximos pasos</h2>
+    <div class="sec-sub">Averiguar → validar → marca local → importar.</div>
+
+    <div class="phase">Ahora · Etapa 0</div>
+    <div class="task"><div class="b">1</div><div><h5>Cotizar tostadores que hagan maquila</h5><p>Condiciones, mínimos y costo por kg. Char · 15/06.</p></div></div>
+    <div class="task"><div class="b">2</div><div><h5>Cotizar verde importado local</h5><p>Reemplazar el supuesto del modelo con precio real. Char · 15/06.</p></div></div>
+    <div class="task"><div class="b">3</div><div><h5>Conseguir 10 compromisos pagos</h5><p>Plata o seña, no "me interesa". Pela + Char · 31/07.</p></div></div>
+
+    <div class="phase">Etapa 1 · marca local</div>
+    <div class="task"><div class="b">4</div><div><h5>Cerrar tostador y rótulo mínimo</h5><p>RNE/RNPA según corresponda. Confirmar con despachante/contador.</p></div></div>
+    <div class="task"><div class="b">5</div><div><h5>Firmar acuerdo de socios</h5><p>Antes de la primera venta. Char redacta la v1.</p></div></div>
+    <div class="task"><div class="b">6</div><div><h5>Primeras ventas + cargar números reales</h5><p>Online + 3–5 cafeterías. Actualizar el modelo.</p></div></div>
+
+    <div class="phase">Etapa 2 · importar</div>
+    <div class="task v"><div class="b">7</div><div><h5>Cotizar lote chico desde Brasil</h5><p>Despachante + referencias verificables del proveedor.</p></div></div>
+    <div class="task v"><div class="b">8</div><div><h5>Constituir SAS + inscripción importador</h5><p>ARCA + Responsable Inscripto. Recién con demanda probada.</p></div></div>
+  </section>
+
+  <div class="rule">
+    <div class="k">La regla más importante</div>
+    <p>La idea todavía <b>no está validada</b>. La única tarea que importa hoy es que 10 personas paguen. Todo lo demás puede esperar — y arrancar mil cosas a la vez es la forma de no terminar ninguna.</p>
+  </div>
+
+  <div class="filebar">
     <a href="README.md">README.md</a>
     <a href="ROADMAP.md">ROADMAP.md</a>
     <a href="tablero.md">tablero.md</a>
-    <a href="docs/memoria.md">docs/memoria.md</a>
-    <a href="docs/acuerdo-socios.md">docs/acuerdo-socios.md</a>
-    <a href="docs/regulatorio.md">docs/regulatorio.md</a>
-    <a href="investigacion/averiguaciones.md">investigacion/averiguaciones.md</a>
+    <a href="finanzas/modelo-6-meses.xlsx">modelo-6-meses.xlsx</a>
+    <a href="docs/memoria.md">memoria.md</a>
+    <a href="docs/acuerdo-socios.md">acuerdo-socios.md</a>
+    <a href="docs/regulatorio.md">regulatorio.md</a>
   </div>
-  <p class="foot-note rv d2">Lo que no se cierra queda abierto y a la vista de los dos. Este plan está diseñado para sobrevivir el medio: tareas chicas, fechas duras y un criterio claro de cuándo seguir, frenar o cambiar.</p>
-  <p class="sig rv d2">— Documento vivo. Se completa a medida que se aprende.</p>
-</footer>
+
+</div>
+
+<nav>
+  <div class="navin">
+    <a href="#estado" data-t="estado"><span class="ic">📊</span>Estado</a>
+    <a href="#idea" data-t="idea"><span class="ic">☕</span>Idea</a>
+    <a href="#camino" data-t="camino"><span class="ic">🗺️</span>Camino</a>
+    <a href="#numeros" data-t="numeros"><span class="ic">💰</span>Números</a>
+    <a href="#socios" data-t="socios"><span class="ic">🤝</span>Socios</a>
+    <a href="#pasos" data-t="pasos"><span class="ic">🚀</span>Pasos</a>
+  </div>
+</nav>
 
 <script>
+  const links=[...document.querySelectorAll('nav a')];
+  const map=Object.fromEntries(links.map(a=>[a.dataset.t,a]));
   const io=new IntersectionObserver((es)=>{
-    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
-  },{threshold:.15});
-  document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        (map[e.target.id]||{}).classList?.add('active');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section').forEach(s=>io.observe(s));
 </script>
 
 </body>
