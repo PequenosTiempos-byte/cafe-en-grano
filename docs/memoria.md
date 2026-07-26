@@ -1,8 +1,8 @@
 # Memoria — Proyecto Café (idea en exploración)
 
-**Socios:** hermano (motor / empuje) + Char (acompaña, investiga, aporta mirada estratégica e impositiva)
-**Estado:** Idea en exploración — pre-proyecto
-**Fecha:** Mayo 2026
+**Socios:** Pela (motor / empuje) + Char (acompaña, investiga, aporta mirada estratégica e impositiva). *Julio 2026: Pela propuso sumar a un amigo como posible 3er socio — ver acuerdo-socios.md, no confirmado todavía.*
+**Estado:** Etapa 0 en curso — negociación activa con proveedor, validando demanda
+**Fecha:** Julio 2026 (actualizado)
 
 > Documento vivo. Hoy es una idea, no un proyecto cerrado. Se completa a medida que se aprende. Char va sumando lo que averigua; los roles arrancan mezclados y se van clarificando con el tiempo.
 
@@ -41,12 +41,14 @@ Está bien que al principio los roles se solapen. Lo importante es que, a medida
 
 Lista de cosas concretas para investigar y volcar acá a medida que se sepan:
 
-1. **Tostadores locales que hagan maquila** (tueste por encargo): quiénes, condiciones, mínimos, costo por kg.
-2. **Costo del grano** (verde local hoy; verde de Brasil más adelante).
-3. **Precio de mercado** del café de especialidad: online (por 250g/1kg) y precio a cafeterías.
-4. **Rotulado y registros** para vender envasado: qué exige el Código Alimentario, qué cubre la habilitación del tostador y qué queda a cargo de la marca (RNE/RNPA).
-5. **Cafeterías objetivo:** armar lista de 10–15 candidatas (CABA y/o interior) y cómo compran.
-6. **Para más adelante:** un despachante de aduana para cotizar un lote chico desde Brasil y confirmar requisitos de importación.
+1. ✅ **Tostadores locales que hagan maquila:** nipper.cafécrudo confirmado — maquila solo por bolsa entera (59kg Brasil, 35kg Colombia/Guatemala/Costa Rica, 30kg Perú). Tueste: ARS $60.000+IVA/bolsa. Molienda: ARS $90.000+IVA total. Pendiente confirmar si el fee de tueste es fijo o varía según tamaño de bolsa (crítico para comparar orígenes por kg).
+2. ✅ **Costo del grano (vía nipper):** cotizado para Colombia Excelso (35kg → ~112 unidades de 250g, ~61% margen bruto a $18.000) y Perú Caturra Huánuco (30kg → ~96 unidades, mayor costo unitario, menor margen). Preferencia actual: volumen por sobre margen.
+3. ✅ **Precio de mercado:** John & Joe vende variedades idénticas de nipper desde ARS $15.930+/250g — confirma que el modelo funciona en el mercado argentino.
+4. **Rotulado y registros:** ver detalle ampliado en `tramites-importacion.md` (RNE/RNPA vía INAL, además AFIDI/SENASA para origen vegetal).
+5. **Cafeterías objetivo:** lista de 10–15 candidatas — pendiente.
+6. **Bloqueo detectado:** CUIT/CUIL sin inscripciones activas en ARCA impide facturar con nipper. Char lo resuelve por su cuenta (expertise contable).
+7. **Descartado como proveedor:** Lobo Negro Tostadores — es tostador de producto terminado que compite en retail, no maquila. Queda como referencia de pricing competitivo.
+8. **Para más adelante:** despachante de aduana para lote de prueba desde Brasil — ver los 3 caminos posibles en `tramites-importacion.md`.
 
 ---
 
@@ -89,12 +91,15 @@ Ahora:
 
 ---
 
-## 9. Números (a completar cuando se tengan los datos)
+## 9. Números (actualizado julio 2026 — ver modelo completo en finanzas/modelo-6-meses.xlsx)
 
 - Capital disponible primeros 6 meses: `[$]`
-- Costo grano + maquila por kg: `[$]`
-- Precio de venta objetivo (online / cafetería): `[$]`
-- Margen bruto por kg y punto de equilibrio: `[a calcular]`
+- **Costo maquila (nipper):** tueste ARS $60.000+IVA/bolsa; molienda ARS $90.000+IVA total. Flat o variable por tamaño de bolsa: **pendiente confirmar**.
+- **Origen Colombia Excelso:** bolsa 35kg → ~112 unidades de 250g. Margen bruto estimado ~61% a precio de venta $18.000.
+- **Origen Perú Caturra Huánuco:** bolsa 30kg → ~96 unidades de 250g. Costo unitario mayor, margen menor que Colombia.
+- **Precio de venta objetivo:** $18.000/250g (propio) vs. referencia de mercado John & Joe desde $15.930/250g con las mismas variedades.
+- **Punto de equilibrio:** a calcular una vez cerrado origen definitivo y confirmado fee de maquila.
+- **Costo de importación directa (Etapa 2, referencia a futuro, NO activar todavía):** ver desglose completo en `tramites-importacion.md` — constitución SAS $530.000–$1.560.000, más IVA/Ganancias/TE sobre CIF (arancel 0% por ser Mercosur), más trámites INAL/SENASA. Timeline realista 9–14 meses.
 
 ---
 
@@ -103,6 +108,8 @@ Ahora:
 - Proveedor del exterior sin referencia: no mover dinero sin referencias verificables y pago protegido.
 - Frescura del tostado: por eso no se importa tostado.
 - Idea que no cierra: mitigar con hitos y criterios de corte; avanzar solo si cada etapa se cumple.
+- **[Julio 2026] Tercer socio propuesto (amigo de Pela):** no avanzar en trámites de importación ni conversaciones de números con él hasta actualizar `acuerdo-socios.md` a tres partes.
+- **[Julio 2026] Bloqueo CUIT/ARCA:** sin resolver, nipper no puede facturar — gating item antes de cualquier compromiso de compra.
 
 ---
 
@@ -114,4 +121,8 @@ Aporte de cada uno (dinero, tiempo, contactos), roles, cómo se decide, reparto 
 
 ## Próximo paso
 
-Empezar por la **lista de averiguaciones (Sección 4)** y, en paralelo, validar con 10 posibles compradores. Sin gastar un peso todavía.
+1. Resolver bloqueo CUIT/ARCA para poder facturar con nipper.
+2. Confirmar con nipper si el fee de maquila es flat o varía por bolsa.
+3. Actualizar `acuerdo-socios.md` a tres partes antes de la reunión con Pela y el amigo.
+4. Seguir sumando los 10 compromisos pagos (corte: 31/07/2026).
+5. Sin gastar un peso en importación todavía — ver `tramites-importacion.md` para los 3 caminos posibles cuando corresponda evaluarlo.
